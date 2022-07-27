@@ -11,11 +11,11 @@ import { ListCategory } from "../../molecules";
 const Header = () => {
   const [show, setShow] = useState(false);
   return (
-    <header className="px-4 py-8 bg-third-ocean absolute top-0 left-0 w-fit h-full flex flex-col justify-between items-center">
+    <header className="px-4 py-8 bg-third-ocean w-fit h-screen flex flex-col justify-between items-center">
       <div className="logo w-fit">
         <img src={Logo} alt="logo" className="rounded-lg w-14 h-14" />
       </div>
-      <div className="category flex flex-col h-2/5 gap-6">
+      <div className="category flex flex-col h-2/5 gap-6 justify-center">
         <FontAwesomeIcon
           icon={faListUl}
           color="#809bce"

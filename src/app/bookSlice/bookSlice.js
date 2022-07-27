@@ -4,6 +4,7 @@ const initialState = {
   category: null,
   booklist: null,
   searchKey: null,
+  searchResult: null,
 };
 
 export const bookSlice = createSlice({
@@ -28,9 +29,16 @@ export const bookSlice = createSlice({
         searchKey: action.payload,
       };
     },
+    setSearchResult: (state, action) => {
+      return {
+        ...state,
+        searchResult: action.payload,
+      };
+    },
   },
 });
 
-export const { setCategory, setBookList, setSearchKey } = bookSlice.actions;
+export const { setCategory, setBookList, setSearchKey, setSearchResult } =
+  bookSlice.actions;
 
 export default bookSlice.reducer;

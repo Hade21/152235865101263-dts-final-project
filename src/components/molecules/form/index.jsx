@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   setCPass,
   setEmail,
@@ -66,6 +67,16 @@ const FormLoginRegister = ({ type, onSubmit }) => {
           <Button type="submit">
             {type === "login" ? "Login" : "Register"}
           </Button>
+          <p className="font-rubik font-light text-base">
+            <i>
+              {type === "login" ? "Belum punya akun? " : "Sudah punya akun? "}
+            </i>
+            <Link to={type === "login" ? "/register" : "/login"}>
+              <b className="cursor-pointer font-medium">
+                {type === "login" ? "Register" : "Login"}
+              </b>
+            </Link>
+          </p>
         </div>
       </form>
     </>
