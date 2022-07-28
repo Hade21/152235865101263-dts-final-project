@@ -5,6 +5,7 @@ const initialState = {
   booklist: null,
   searchKey: null,
   searchResult: null,
+  page: 1,
 };
 
 export const bookSlice = createSlice({
@@ -35,10 +36,32 @@ export const bookSlice = createSlice({
         searchResult: action.payload,
       };
     },
+    setNextPage: (state) => {
+      const nextPage = state.page + 1;
+      return {
+        ...state,
+        page: nextPage,
+      };
+    },
+    setPrevPage: (state) => {
+      if (state.page > 1) {
+        const prevPage = state.page - 1;
+        return {
+          ...state,
+          page: prevPage,
+        };
+      }
+    },
   },
 });
 
-export const { setCategory, setBookList, setSearchKey, setSearchResult } =
-  bookSlice.actions;
+export const {
+  setCategory,
+  setBookList,
+  setSearchKey,
+  setSearchResult,
+  setNextPage,
+  setPrevPage,
+} = bookSlice.actions;
 
 export default bookSlice.reducer;

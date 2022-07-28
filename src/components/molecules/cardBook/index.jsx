@@ -12,7 +12,7 @@ const CardBook = ({ image }) => {
       </div>
       <div className="buttons">
         <Button type="submit">Beli</Button>
-        <Button type="submit" model="container">
+        <Button type="submit" model="outlined">
           Wishlist
         </Button>
       </div>
