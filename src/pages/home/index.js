@@ -51,7 +51,7 @@ const Home = () => {
     }
 
     fetchData();
-  }, [searchKey, category, page, cookies, dispatch]);
+  }, [searchKey, category, page, cookies, dispatch, bookList]);
 
   return (
     <div className="flex">

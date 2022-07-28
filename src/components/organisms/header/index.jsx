@@ -7,9 +7,44 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Logo } from "../../../assets";
 import { ListCategory } from "../../molecules";
+import { api } from "../../../config/api/api";
+import { useCookies } from "react-cookie";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../../app/userSlice/userReducer";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [cookies, setCookies, removeCookies] = useCookies(["token"]);
+
+  const handleLogout = () => {
+    api
+      .post(
+        "/logout",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${cookies.token}`,
+          },
+        }
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          if (res.data.token.status === "Revoked") {
+            removeCookies("token");
+            dispatch(setUser(null));
+            navigate("/login");
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <header className="px-4 py-8 bg-third-ocean w-fit h-screen flex flex-col justify-between items-center">
       <div className="logo w-fit">
@@ -39,6 +74,7 @@ const Header = () => {
           color="#c64191"
           size="2x"
           className="cursor-pointer"
+          onClick={handleLogout}
         />
       </div>
     </header>
