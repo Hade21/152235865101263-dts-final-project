@@ -9,6 +9,7 @@ import { api } from "../../config/api/api";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  // eslint-disable-next-line no-unused-vars
   const [cookies, setCookies] = useCookies(["token"]);
   const email = useSelector((state) => state.user.email);
   const password = useSelector((state) => state.user.pass);
@@ -29,6 +30,7 @@ const Login = () => {
       .then((res) => {
         if (res.status === 200) {
           dispatch(setUser(res.data.user));
+          console.log(res.data);
         }
       })
       .catch((err) => {
@@ -53,7 +55,7 @@ const Login = () => {
               secure: true,
             });
             dispatch(setErrMsg(null));
-            getUser(cookies.token);
+            getUser(res.data.token.plain_text);
             navigate("/");
           }
         }

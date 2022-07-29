@@ -9,9 +9,10 @@ import { Logo } from "../../../assets";
 import { ListCategory } from "../../molecules";
 import { api } from "../../../config/api/api";
 import { useCookies } from "react-cookie";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../../app/userSlice/userReducer";
 import { useNavigate } from "react-router-dom";
+import { setReset } from "../../../app/bookSlice/bookSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const Header = () => {
   const [show, setShow] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [cookies, setCookies, removeCookies] = useCookies(["token"]);
+  const user = useSelector((state) => state.user.user);
 
   const handleLogout = () => {
     api
@@ -36,6 +38,7 @@ const Header = () => {
           if (res.data.token.status === "Revoked") {
             removeCookies("token");
             dispatch(setUser(null));
+            dispatch(setReset());
             navigate("/login");
           }
         }
@@ -44,6 +47,7 @@ const Header = () => {
         console.log(err);
       });
   };
+  console.log(user);
 
   return (
     <header className="px-4 py-8 bg-third-ocean w-fit h-screen flex flex-col justify-between items-center">
@@ -66,7 +70,7 @@ const Header = () => {
         <div className="user">
           <FontAwesomeIcon icon={faUserCircle} color="#809bce" size="3x" />
           <h3 className="font-rubik font-normal text-slate-600 text-base w-min">
-            User Testing
+            {user ? user.name : "Guest"}
           </h3>
         </div>
         <FontAwesomeIcon

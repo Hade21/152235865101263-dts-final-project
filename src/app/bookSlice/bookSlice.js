@@ -52,6 +52,16 @@ export const bookSlice = createSlice({
         };
       }
     },
+    setReset: (state, action) => {
+      return {
+        ...state,
+        category: null,
+        booklist: null,
+        searchKey: null,
+        searchResult: null,
+        page: 1,
+      };
+    },
   },
 });
 
@@ -62,6 +72,7 @@ export const {
   setSearchResult,
   setNextPage,
   setPrevPage,
+  setReset,
 } = bookSlice.actions;
 
 export default bookSlice.reducer;

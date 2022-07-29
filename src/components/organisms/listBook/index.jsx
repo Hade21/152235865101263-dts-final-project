@@ -3,8 +3,8 @@ import { CardBook } from "../../molecules";
 
 const ListBook = ({ data }) => {
   return (
-    <div className="list-wrapper h-full overflow-auto">
-      {data.length > 0 ? (
+    <div className="list-wrapper h-full grid grid-cols-2 gap-4 overflow-auto">
+      {data ? (
         data.map((item, i) => {
           return (
             <CardBook

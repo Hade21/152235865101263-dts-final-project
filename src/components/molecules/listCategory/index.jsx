@@ -40,11 +40,13 @@ const ListCategory = () => {
         return (
           <p
             className={`font-rubik font-normal text-base cursor-pointer transition-all duration-100 ${
-              category === item.slug
-                ? "text-slate-800 font-semibold"
+              category
+                ? category.slug === item.slug
+                  ? "text-slate-800 font-semibold"
+                  : "text-slate-500"
                 : "text-slate-500"
             }`}
-            onClick={() => dispatch(setCategory(item.slug))}
+            onClick={() => dispatch(setCategory(item))}
           >
             {item.name}
           </p>

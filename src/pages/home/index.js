@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { setBookList, setSearchResult } from "../../app/bookSlice/bookSlice";
 import { Header, ListBook, TopBar } from "../../components";
 import { api } from "../../config/api/api";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const page = useSelector((state) => state.book.page);
   const category = useSelector((state) => state.book.category);
   const bookList = useSelector((state) => state.book.booklist);
@@ -27,7 +29,7 @@ const Home = () => {
           dispatch(setBookList(result.data.books));
           console.log(bookList);
         } else if (!searchKey && category) {
-          const query = `/books?page=${page}&language=id&category=${category}`;
+          const query = `/books?page=${page}&language=id&category=${category.slug}`;
           const result = await api.get(query, {
             headers: {
               Authorization: `Bearer ${cookies.token}`,
@@ -46,7 +48,10 @@ const Home = () => {
           dispatch(setSearchResult(result.data.books));
         }
       } catch (error) {
-        console.log(error);
+        if (error.response?.status === 401) {
+          alert("Sesi Anda telah beraakhir, Silahkan login!");
+          navigate("/login");
+        }
       }
     }
 
@@ -55,11 +60,14 @@ const Home = () => {
   }, [searchKey, category, page, cookies, dispatch]);
 
   return (
-    <div className="flex">
+    <div className="flex w-screen h-screen overflow-y-scroll">
       <Header />
-      <main className="w-full">
+      <main className="w-full h-full">
         <TopBar />
-        <div className="content h-full overflow-auto">
+        <div className="content h-5/6 px-6 py-4">
+          <h2 className="font-rubik text-2xl px-6 pb-4 font-semibold">
+            {category ? category.name : "Daftar Buku Terpopuler"}
+          </h2>
           <ListBook data={searchKey ? searchResult : bookList} />
         </div>
       </main>

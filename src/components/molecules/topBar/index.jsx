@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setSearchKey } from "../../../app/bookSlice/bookSlice";
+import { setCategory, setSearchKey } from "../../../app/bookSlice/bookSlice";
 import { Search } from "../../atoms";
 
 const TopBar = () => {
@@ -8,6 +8,11 @@ const TopBar = () => {
 
   const handleSearch = (e) => {
     dispatch(setSearchKey(e.target.value));
+    if (e.target.value.length > 0) {
+      dispatch(setCategory(`Menampilkan hasil : ${e.target.value}`));
+    } else {
+      dispatch(setCategory(null));
+    }
   };
 
   return (
