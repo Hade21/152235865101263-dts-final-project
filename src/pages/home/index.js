@@ -51,7 +51,8 @@ const Home = () => {
     }
 
     fetchData();
-  }, [searchKey, category, page, cookies, dispatch, bookList]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchKey, category, page, cookies, dispatch]);
 
   return (
     <div className="flex">
