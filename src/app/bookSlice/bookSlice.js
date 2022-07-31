@@ -6,6 +6,7 @@ const initialState = {
   searchKey: null,
   searchResult: null,
   page: 1,
+  wishlist: false,
 };
 
 export const bookSlice = createSlice({
@@ -52,7 +53,13 @@ export const bookSlice = createSlice({
         };
       }
     },
-    setReset: (state, action) => {
+    setWishlist: (state) => {
+      return {
+        ...state,
+        wishlist: !state.wishlist,
+      };
+    },
+    setReset: (state) => {
       return {
         ...state,
         category: null,
@@ -60,6 +67,7 @@ export const bookSlice = createSlice({
         searchKey: null,
         searchResult: null,
         page: 1,
+        wishlist: false,
       };
     },
   },
@@ -73,6 +81,7 @@ export const {
   setNextPage,
   setPrevPage,
   setReset,
+  setWishlist,
 } = bookSlice.actions;
 
 export default bookSlice.reducer;

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Button = ({ children, type, model = "container" }) => {
+const Button = ({ children, type, model = "container", onClick }) => {
   const container =
     "px-8 py-2 border-2 border-prime-blue bg-prime-blue rounded-sm shadow-md font-rubik text-white text-lg w-fit transition-all duration-200 hover:bg-sec-blue active:translate-y-1 active:shadow-none";
   const outlined =
@@ -10,6 +10,7 @@ const Button = ({ children, type, model = "container" }) => {
       <button
         type={type}
         className={model === "container" ? container : outlined}
+        onClick={onClick}
       >
         {children}
       </button>

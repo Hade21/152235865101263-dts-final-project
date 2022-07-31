@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { setBookList, setSearchResult } from "../../app/bookSlice/bookSlice";
-import { Footer, Header, ListBook, TopBar } from "../../components";
+import { Footer, Header, ListBook, TopBar, Wishlist } from "../../components";
 import { api } from "../../config/api/api";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const wishlist = useSelector((state) => state.book.wishlist);
   const page = useSelector((state) => state.book.page);
   const category = useSelector((state) => state.book.category);
   const bookList = useSelector((state) => state.book.booklist);
@@ -61,9 +62,17 @@ const Home = () => {
         <TopBar />
         <div className="content h-[78%] px-6 py-4">
           <h2 className="font-rubik text-2xl px-6 pb-4 font-semibold">
-            {category ? category.name : "Daftar Buku Terpopuler"}
+            {!wishlist
+              ? category
+                ? category.name
+                : "Daftar Buku Terpopuler"
+              : "Wishlist"}
           </h2>
-          <ListBook data={searchKey ? searchResult : bookList} />
+          {!wishlist ? (
+            <ListBook data={searchKey ? searchResult : bookList} />
+          ) : (
+            <Wishlist />
+          )}
         </div>
         <Footer />
       </main>

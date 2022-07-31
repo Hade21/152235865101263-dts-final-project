@@ -93,9 +93,6 @@ const Detail = () => {
                 Beli
               </a>
             </Button>
-            <Button type="submit" model="outlined">
-              Wishlist
-            </Button>
           </div>
         </div>
       ) : (

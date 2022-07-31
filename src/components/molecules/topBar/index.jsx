@@ -1,12 +1,17 @@
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { useDispatch } from "react-redux";
-import { setCategory, setSearchKey } from "../../../app/bookSlice/bookSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setCategory,
+  setSearchKey,
+  setWishlist,
+} from "../../../app/bookSlice/bookSlice";
 import { Search } from "../../atoms";
 
 const TopBar = () => {
   const dispatch = useDispatch();
+  const wishlist = useSelector((state) => state.book.wishlist);
 
   const handleSearch = (e) => {
     dispatch(setSearchKey(e.target.value));
@@ -20,8 +25,11 @@ const TopBar = () => {
   return (
     <div className="top-bar px-4 py-4 bg-third-ocean flex justify-between">
       <div className="navigation">
-        <p className="font-rubik text-base font-medium text-slate-500 hover:text-slate-800 cursor-pointer">
-          WishList
+        <p
+          className="font-rubik text-base font-medium text-slate-500 hover:text-slate-800 cursor-pointer"
+          onClick={() => dispatch(setWishlist())}
+        >
+          {!wishlist ? "WishList" : "Home"}
         </p>
       </div>
       <div className="search">
