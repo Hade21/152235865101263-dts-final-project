@@ -13,7 +13,7 @@ const Search = ({ onChange }) => {
         }`}
         onClick={() => setShow(!show)}
       >
-        <FontAwesomeIcon icon={faSearch} color="#809bce" size="md" />
+        <FontAwesomeIcon icon={faSearch} color="#809bce" size="lg" />
         Search
       </label>
       <input

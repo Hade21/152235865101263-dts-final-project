@@ -28,11 +28,7 @@ const Detail = () => {
         }
       })
       .catch((error) => {
-        if (error.response?.code === "ERR_NETWORK") {
-          alert("Tidak ada koneksi!");
-        } else if (error.response?.status === 401) {
-          alert("Anda harus login terlebih dahulu!");
-        }
+        console.log(error);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

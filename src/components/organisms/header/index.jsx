@@ -50,7 +50,7 @@ const Header = () => {
   console.log(user);
 
   return (
-    <header className="px-4 py-8 bg-third-ocean w-fit h-screen flex flex-col justify-between items-center">
+    <header className="px-4 py-8 bg-third-ocean w-fit h-screen flex flex-col justify-between items-center z-10">
       <div className="logo w-fit">
         <img src={Logo} alt="logo" className="rounded-lg w-14 h-14" />
       </div>

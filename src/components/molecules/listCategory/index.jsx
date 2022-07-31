@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { api } from "../../../config/api/api";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategory } from "../../../app/bookSlice/bookSlice";
 
 const ListCategory = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [cookies] = useCookies(["token"]);
   const token = `Bearer ${cookies.token}`;
@@ -24,12 +22,7 @@ const ListCategory = () => {
         setlistCategory(res.data.categories);
       })
       .catch((err) => {
-        if (err.response?.status === 0) {
-          alert("No Network Access!");
-        } else if (err.response?.status === 401) {
-          alert("Silahkan Login terlebih dahulu!");
-          navigate("/login");
-        }
+        console.log(err);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

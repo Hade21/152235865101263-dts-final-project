@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useCookies } from "react-cookie";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setErrMsg, setUser } from "../../app/userSlice/userReducer";
@@ -8,10 +9,34 @@ import { api } from "../../config/api/api";
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [cookies] = useCookies(["token"]);
   const name = useSelector((state) => state.user.name);
   const email = useSelector((state) => state.user.email);
   const password = useSelector((state) => state.user.pass);
   const confirmPassword = useSelector((state) => state.user.cPass);
+
+  useEffect(() => {
+    const token = cookies.token;
+    if (token) {
+      api
+        .get("/user", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            navigate("/");
+          }
+        })
+        .catch((err) => {
+          if (err.response?.status === 401) {
+            return;
+          }
+        });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const register = (e) => {
     e.preventDefault();
