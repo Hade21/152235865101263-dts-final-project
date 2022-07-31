@@ -28,9 +28,13 @@ const ListBook = ({ data }) => {
   const navigation = (
     <div className="button col-span-2 flex justify-around mt-2 transition-all duration-200">
       {page > 1 ? (
-        <Button onClick={() => dispatch(setPrevPage())}>Prev</Button>
+        <Button model="outlined" onClick={() => dispatch(setPrevPage())}>
+          Prev
+        </Button>
       ) : null}
-      <Button onClick={() => dispatch(setNextPage())}>Next</Button>
+      <Button model="outlined" onClick={() => dispatch(setNextPage())}>
+        Next
+      </Button>
     </div>
   );
 
