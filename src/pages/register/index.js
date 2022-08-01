@@ -63,16 +63,18 @@ const Register = () => {
   };
 
   return (
-    <div className="w-full h-screen object-cover object-left font-rubik text-xl font-medium flex justify-between">
-      <div className="image items-center w-1/2 h-full">
+    <div className="w-full h-screen object-cover object-left font-rubik text-xl font-medium lg:flex lg:justify-between relative lg:static">
+      <div className="image items-center lg:w-1/2 h-full w-full absolute lg:static top-0 left-0">
         <img
           src="https://cdn.dribbble.com/users/2317423/screenshots/10441884/man_reading_a_book_illustration_2_4x.jpg"
           alt="reading-illustration"
           className="w-full h-full object-cover object-center"
         />
       </div>
-      <div className="form w-1/2 h-full">
-        <FormLoginRegister type="register" onSubmit={register} />
+      <div className="form lg:w-1/2 h-full flex items-center z-10 lg:block">
+        <div className="wrapper bg-white rounded-lg lg:rounded-none w-5/6 mx-auto h-5/6 lg:w-full bg-opacity-75 lg:bg-opacity-100 shadow-glass lg:shadow-none backdrop-blur-glass lg:backdrop-blur-none border-[1px] lg:border-none border-glass-border">
+          <FormLoginRegister type="register" onSubmit={register} />
+        </div>
       </div>
     </div>
   );

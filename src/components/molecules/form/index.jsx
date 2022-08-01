@@ -20,15 +20,15 @@ const FormLoginRegister = ({ type, onSubmit }) => {
   return (
     <>
       <form
-        className="w-full h-full flex flex-col px-4 justify-center gap-20 items-center transition-all duration-200"
+        className="w-full h-full flex flex-col px-4 justify-center gap-8 lg:gap-20 items-center transition-all duration-200"
         onSubmit={onSubmit}
       >
-        <h1 className="font-rubik font-bold text-4xl text-left transition-all duration-200">
+        <h1 className="font-rubik font-bold text-2xl sm:text-3xl lg:text-4xl text-left transition-all duration-200">
           {type === "login" ? "Login" : "Register"}
         </h1>
         <div className="input w-3/4 flex flex-col gap-4 items-center transition-all duration-200">
           {errMsg ? (
-            <h1 className="font-medium font-rubik text-xl bg-fifth-pink text-red-800 w-full rounded-md py-3 transition-all duration-200 animate-pulse- animate-wipe-down">
+            <h1 className="font-medium font-rubik text-base lg:text-xl bg-fifth-pink text-red-800 w-full rounded-md py-3 transition-all duration-200 animate-pulse- animate-wipe-down">
               {errMsg}
             </h1>
           ) : null}
@@ -67,7 +67,7 @@ const FormLoginRegister = ({ type, onSubmit }) => {
           <Button type="submit">
             {type === "login" ? "Login" : "Register"}
           </Button>
-          <p className="font-rubik font-light text-base">
+          <p className="font-rubik font-light text-sm sm:text-base">
             <i>
               {type === "login" ? "Belum punya akun? " : "Sudah punya akun? "}
             </i>

@@ -16,18 +16,13 @@ module.exports = {
         "third-ocean": "#b8e0d4",
         "fourth-light-ocean": "#d6eadf",
         "fifth-pink": "#eac4d5",
+        "glass-border": "rgba( 255, 255, 255, 0.18 )",
       },
-      keyframes: {
-        "wipe-down": {
-          "0%": { height: "0%", opacity: "0%" },
-          "25%": { height: "30%" },
-          "50%": { height: "60%" },
-          "75%": { height: "85%" },
-          "100%": { height: "100%", opacity: "100%" },
-        },
+      boxShadow: {
+        glass: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
       },
-      animation: {
-        "wipe-down": "wipe-down 2s ",
+      backdropBlur: {
+        glass: "4px",
       },
     },
   },
