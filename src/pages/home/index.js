@@ -60,8 +60,8 @@ const Home = () => {
       <Header />
       <main className="w-full h-full">
         <TopBar />
-        <div className="content h-[78%] px-6 py-4">
-          <h2 className="font-rubik text-2xl px-6 pb-4 font-semibold">
+        <div className="content h-3/4 md:h-[70%] lg:h-[78%] px-3 sm:px-4 lg:px-6 py-2 md:py-4">
+          <h2 className="font-rubik text-base md:text-xl lg:text-2xl px-2 sm:px4 lg:px-6 pb-2 md:pb-4 font-semibold">
             {!wishlist
               ? category
                 ? category.name

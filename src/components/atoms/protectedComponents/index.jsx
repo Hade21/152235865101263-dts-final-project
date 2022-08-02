@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { api } from "../../../config/api/api";
 
 const ProtectedComponents = ({ children, loginOnly = true }) => {
   const [cookies] = useCookies(["token"]);
   const [user, setUser] = useState();
-  const navigate = useNavigate();
 
   const token = cookies.token;
 
@@ -35,10 +34,10 @@ const ProtectedComponents = ({ children, loginOnly = true }) => {
 
   if (!user && loginOnly) {
     console.log("tidak ada user");
-    return navigate("/login");
+    return <Navigate to="/login" />;
   } else if (user && !loginOnly) {
     console.log("sudah ada user");
-    return navigate("/");
+    return <Navigate to="/" />;
   } else {
     return children;
   }

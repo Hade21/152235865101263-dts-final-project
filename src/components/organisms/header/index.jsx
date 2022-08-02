@@ -50,16 +50,20 @@ const Header = () => {
   console.log(user);
 
   return (
-    <header className="px-4 py-8 bg-third-ocean w-fit h-screen flex flex-col justify-between items-center z-10">
+    <header className="px-2 py-2 lg:px-4 lg:py-8 bg-third-ocean w-fit h-screen flex flex-col justify-between items-center z-10">
       <div className="logo w-fit">
-        <img src={Logo} alt="logo" className="rounded-lg w-14 h-14" />
+        <img
+          src={Logo}
+          alt="logo"
+          className="rounded-lg lg:w-14 lg:h-14 sm:w-10 sm:h-10 w-8 h-8"
+        />
       </div>
       <div className="category flex flex-col h-2/5 gap-6 justify-center">
         <FontAwesomeIcon
           icon={faListUl}
           color="#809bce"
-          size="2x"
-          className="cursor-pointer"
+          size="lg"
+          className="cursor-pointer text-lg sm:text-2xl lg:text-3xl"
           onClick={() => setShow(!show)}
         />
         <div className={show ? "list h-full w-fit" : "list w-0 h-0"}>
@@ -68,16 +72,21 @@ const Header = () => {
       </div>
       <div className="flex flex-col gap-6">
         <div className="user">
-          <FontAwesomeIcon icon={faUserCircle} color="#809bce" size="3x" />
-          <h3 className="font-rubik font-normal text-slate-600 text-base w-min">
+          <FontAwesomeIcon
+            icon={faUserCircle}
+            color="#809bce"
+            size="lg"
+            className="text-lg sm:text-2xl lg:text-3xl"
+          />
+          <h3 className="font-rubik font-normal text-slate-600 text-xs lg:text-base w-min">
             {user ? user.name : "Guest"}
           </h3>
         </div>
         <FontAwesomeIcon
           icon={faRightFromBracket}
           color="#c64191"
-          size="2x"
-          className="cursor-pointer"
+          size="lg"
+          className="cursor-pointer text-lg sm:text-2xl lg:text-3xl"
           onClick={handleLogout}
         />
       </div>
