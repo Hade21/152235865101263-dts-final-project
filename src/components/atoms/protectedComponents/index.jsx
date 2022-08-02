@@ -35,11 +35,9 @@ const ProtectedComponents = ({ children, loginOnly = true }) => {
   }, [token, user]);
 
   if (!user && loginOnly) {
-    console.log("tidak ada user");
     return <Navigate to="/login" />;
     // return navigate("/login");
   } else if (user && !loginOnly) {
-    console.log("sudah ada user");
     return <Navigate to="/" />;
     // return navigate("/");
   } else {

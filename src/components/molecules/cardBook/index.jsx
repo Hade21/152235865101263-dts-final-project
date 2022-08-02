@@ -2,7 +2,16 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../atoms";
 
-const CardBook = ({ image, title, author, price, url, id, onWishlist }) => {
+const CardBook = ({
+  image,
+  title,
+  author,
+  price,
+  url,
+  id,
+  btnType,
+  onWishlist,
+}) => {
   const navigate = useNavigate();
   return (
     <div className="card snap-start h-full flex flex-col lg:flex-row gap-2 lg:gap-4 items-center px-6 py-4 bg-slate-200 rounded-lg">
@@ -34,7 +43,7 @@ const CardBook = ({ image, title, author, price, url, id, onWishlist }) => {
             </a>
           </Button>
           <Button type="submit" model="outlined" onClick={onWishlist}>
-            Wishlist
+            {btnType === "wishlist" ? "Wishlist" : "Remove"}
           </Button>
         </div>
       </div>

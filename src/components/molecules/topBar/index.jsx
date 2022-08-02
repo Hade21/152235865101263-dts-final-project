@@ -24,7 +24,7 @@ const TopBar = () => {
   };
 
   return (
-    <div className="top-bar px-2 py-2 md:px-4 md:py-4 bg-third-ocean flex justify-end md:justify-between">
+    <div className="top-bar px-2 py-2 md:px-4 md:py-4 bg-third-ocean flex justify-end md:justify-between items-center">
       <div className="navigation hidden md:block">
         <p
           className="font-rubik text-base font-medium text-slate-500 hover:text-slate-800 cursor-pointer"

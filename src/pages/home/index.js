@@ -51,7 +51,7 @@ const Home = () => {
           setLoading(false);
         }
       } catch (error) {
-        console.log(error);
+        alert("Error fetching data, Please refresh page!");
       }
     }
 
@@ -78,7 +78,7 @@ const Home = () => {
               loading={isLoading}
             />
           ) : (
-            <Wishlist />
+            <Wishlist search={searchKey} />
           )}
         </div>
         <Footer />

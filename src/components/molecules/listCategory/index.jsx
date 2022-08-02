@@ -25,7 +25,9 @@ const ListCategory = () => {
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        if (err.response?.status === 401) {
+          alert("Error fetching data, please try to login again!");
+        }
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

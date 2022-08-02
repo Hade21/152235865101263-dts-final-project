@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setNextPage, setPrevPage } from "../../../app/bookSlice/bookSlice";
 import { Button } from "../../atoms";
@@ -7,24 +7,24 @@ import { LoadingPage } from "../../atoms";
 
 const ListBook = ({ data, loading }) => {
   const dispatch = useDispatch();
-  const [wishlist, setWishList] = useState([]);
   const user = useSelector((state) => state.user.user);
   const page = useSelector((state) => state.book.page);
 
-  const onWishlist = (id) => {
+  const setWishlist = (id) => {
     const book = data.filter((item) => item.slug === id)[0];
-    const books = wishlist;
-    const exist = books.filter((item) => item.slug === book.slug);
-    if (exist.length === 0) {
-      setWishList(books);
+    const books = JSON.parse(localStorage.getItem(user.name));
+    if (!books || !books.length > 0) {
+      const list = [book];
+      return localStorage.setItem(user.name, JSON.stringify(list));
+    }
+    if (books) {
+      const exist = books.filter((item) => item.slug === book.slug);
+      if (!exist?.length > 0) {
+        books.push(book);
+        return localStorage.setItem(user.name, JSON.stringify(books));
+      }
     }
   };
-
-  useEffect(() => {
-    if (wishlist && user) {
-      localStorage.setItem(user.name, JSON.stringify(wishlist));
-    }
-  }, [wishlist, user]);
 
   const navigation = (
     <div className="button h-fit md:col-span-2 flex gap-4 justify-around mt-2 transition-all duration-200 w-full">
@@ -40,7 +40,7 @@ const ListBook = ({ data, loading }) => {
   );
 
   const content = (
-    <div className="list-wrapper h-full snap-y snap-mandatory grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-4 overflow-auto">
+    <div className="list-wrapper h-full snap-y grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-4 overflow-auto">
       {data?.length > 0 ? (
         data.map((item, i) => {
           return (
@@ -52,8 +52,9 @@ const ListBook = ({ data, loading }) => {
               url={item.original_url}
               id={item.slug}
               key={i}
+              btnType="wishlist"
               onWishlist={() => {
-                onWishlist(item.slug);
+                setWishlist(item.slug);
               }}
             />
           );

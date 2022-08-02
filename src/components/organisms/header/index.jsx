@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faListUl,
@@ -21,7 +21,26 @@ const Header = () => {
   // eslint-disable-next-line no-unused-vars
   const [cookies, setCookies, removeCookies] = useCookies(["token"]);
   const user = useSelector((state) => state.user.user);
-  console.log(user);
+
+  const getUser = (token) => {
+    api
+      .get("/user", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "applocation/json",
+        },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          dispatch(setUser(res.data.user));
+        }
+      })
+      .catch((err) => {
+        if (err.response?.status === 401) {
+          dispatch(setUser(null));
+        }
+      });
+  };
 
   const handleLogout = () => {
     api
@@ -45,10 +64,19 @@ const Header = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        if (err.response?.status === 401) {
+          removeCookies("token");
+          dispatch(setUser(null));
+          dispatch(setReset());
+          navigate("/login");
+        }
       });
   };
-  console.log(user);
+
+  useEffect(() => {
+    getUser(cookies.token);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <header className="px-2 py-2 lg:px-4 lg:py-8 bg-third-ocean w-fit h-screen flex flex-col justify-between items-center z-10">

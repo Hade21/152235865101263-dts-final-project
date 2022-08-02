@@ -2,9 +2,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { setErrMsg, setUser } from "../../app/userSlice/userReducer";
+import { setErrMsg } from "../../app/userSlice/userReducer";
 import { FormLoginRegister } from "../../components";
 import { api } from "../../config/api/api";
+import { setReset } from "../../app/bookSlice/bookSlice";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -19,24 +20,6 @@ const Login = () => {
   tomorrow.setDate(tomorrow.getDate() + 1);
   const expiredDate = tomorrow.toJSON().split("T")[0];
 
-  const getUser = (token) => {
-    api
-      .get("/user", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: "applocation/json",
-        },
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          dispatch(setUser(res.data.user));
-          console.log(res.data);
-        }
-      })
-      .catch((err) => {
-        return dispatch(setErrMsg(err.response?.detail));
-      });
-  };
   const login = (e) => {
     e.preventDefault();
     const body = {
@@ -55,7 +38,7 @@ const Login = () => {
               secure: true,
             });
             dispatch(setErrMsg(null));
-            getUser(res.data.token.plain_text);
+            dispatch(setReset());
             navigate("/");
           }
         }

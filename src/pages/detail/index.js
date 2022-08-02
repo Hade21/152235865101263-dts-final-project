@@ -26,11 +26,12 @@ const Detail = () => {
         if (res.status === 200) {
           setBook(res.data);
           setLoading(true);
-          console.log(book);
         }
       })
       .catch((error) => {
-        console.log(error);
+        if (error.response?.status === 401) {
+          navigate("/");
+        }
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
