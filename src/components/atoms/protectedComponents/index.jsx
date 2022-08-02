@@ -6,6 +6,7 @@ import { api } from "../../../config/api/api";
 const ProtectedComponents = ({ children, loginOnly = true }) => {
   const [cookies] = useCookies(["token"]);
   const [user, setUser] = useState();
+  // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
 
   const token = cookies.token;
