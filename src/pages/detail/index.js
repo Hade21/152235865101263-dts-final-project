@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../config/api/api";
-import { Button } from "../../components";
+import { Button, LoadingPage } from "../../components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 
@@ -11,6 +11,7 @@ const Detail = () => {
   const params = useParams();
   const [cookies] = useCookies();
   const [book, setBook] = useState(null);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     const query = `/books/${params.id}/detail`;
@@ -24,6 +25,7 @@ const Detail = () => {
       .then((res) => {
         if (res.status === 200) {
           setBook(res.data);
+          setLoading(true);
           console.log(book);
         }
       })
@@ -99,7 +101,9 @@ const Detail = () => {
     </p>
   );
 
-  return <main>{content}</main>;
+  return (
+    <main>{!isLoading ? <LoadingPage loading={!isLoading} /> : content}</main>
+  );
 };
 
 export default Detail;
