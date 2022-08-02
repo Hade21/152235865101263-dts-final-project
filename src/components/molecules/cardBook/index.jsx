@@ -27,7 +27,7 @@ const CardBook = ({ image, title, author, price, url, id, onWishlist }) => {
             {price}
           </p>
         </div>
-        <div className="buttons w-full flex flex-col lg:flex-row justify-center items-center gap-2 sm:gap-4 lg:gap-8 mt-6">
+        <div className="buttons w-full flex flex-col lg:flex-row justify-center items-center gap-2 sm:gap-4 mt-6">
           <Button type="submit">
             <a href={url} target="_blank" rel="noopener noreferrer">
               Beli

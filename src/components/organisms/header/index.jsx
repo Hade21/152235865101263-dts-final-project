@@ -21,6 +21,7 @@ const Header = () => {
   // eslint-disable-next-line no-unused-vars
   const [cookies, setCookies, removeCookies] = useCookies(["token"]);
   const user = useSelector((state) => state.user.user);
+  console.log(user);
 
   const handleLogout = () => {
     api
