@@ -20,7 +20,6 @@ const Wishlist = ({ search }) => {
       const books = JSON.parse(localStorage.getItem(user.name));
       if (books) {
         setList(books);
-        console.log(books);
       }
     }
   }, [user, update]);
