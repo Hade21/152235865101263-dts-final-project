@@ -20,6 +20,7 @@ const Wishlist = ({ search }) => {
       const books = JSON.parse(localStorage.getItem(user.name));
       if (books) {
         setList(books);
+        console.log(books);
       }
     }
   }, [user, update]);
@@ -45,7 +46,7 @@ const Wishlist = ({ search }) => {
   });
 
   const noBook = (
-    <p className="w-full h-full col-span-2 flex justify-center items-center text-3xl font-rubik font-semibold">
+    <p className="w-full h-full col-span-2 flex justify-center items-center text-xl md:text-2xl lg:text-3xl font-rubik font-semibold">
       Tidak ada buku di Wishlist!
     </p>
   );
@@ -66,8 +67,8 @@ const Wishlist = ({ search }) => {
   });
 
   return (
-    <div className="list-wrapper h-full grid grid-cols-2 gap-4 overflow-auto">
-      {searchRes
+    <div className="list-wrapper h-full grid grid-cols-1 md:grid-cols-2 gap-4 overflow-auto">
+      {search
         ? searchRes?.length > 0
           ? searchBook
           : noBook
