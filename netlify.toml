@@ -1,3 +1,4 @@
-[[rediects]]
-from = "/*"
+[[redirects]]
+from = "/login"
 to = "/"
+status = 404
