@@ -27,7 +27,7 @@ const ListBook = ({ data, loading }) => {
   };
 
   const navigation = (
-    <div className="button h-fit md:col-span-2 flex gap-4 justify-around mt-2 transition-all duration-200 w-full">
+    <div className="button snap-start h-fit md:col-span-2 flex gap-4 justify-around mt-2 transition-all duration-200 w-full">
       {page > 1 ? (
         <Button model="outlined" onClick={() => dispatch(setPrevPage())}>
           Prev
