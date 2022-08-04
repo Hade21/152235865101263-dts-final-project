@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { api } from "../../../config/api/api";
 
 const ProtectedComponents = ({ children, loginOnly = true }) => {
   const [cookies] = useCookies(["token"]);
   const [user, setUser] = useState();
-  // eslint-disable-next-line no-unused-vars
-  const navigate = useNavigate();
 
   const token = cookies.token;
 
@@ -34,15 +32,17 @@ const ProtectedComponents = ({ children, loginOnly = true }) => {
     }
   }, [token, user]);
 
-  if (!user && loginOnly) {
-    return <Navigate to="/login" />;
-    // return navigate("/login");
-  } else if (user && !loginOnly) {
-    return <Navigate to="/" />;
-    // return navigate("/");
-  } else {
-    return children;
-  }
+  return (
+    <>
+      {!user && loginOnly ? (
+        <Navigate to="/login" replace={true} />
+      ) : user && !loginOnly ? (
+        <Navigate to="/" replace={true} />
+      ) : (
+        children
+      )}
+    </>
+  );
 };
 
 export default ProtectedComponents;

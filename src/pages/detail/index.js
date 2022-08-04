@@ -29,8 +29,12 @@ const Detail = () => {
         }
       })
       .catch((error) => {
-        if (error.response?.status === 401) {
+        if (error?.message === "Network Error") {
+          alert("Koneksi terputus!");
+        } else if (error?.message === "timeout of 5000ms exceeded") {
           navigate("/");
+        } else if (error.response?.status === 401) {
+          navigate("/login");
         }
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps

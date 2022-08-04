@@ -26,7 +26,14 @@ const Router = () => {
             </ProtectedComponents>
           }
         />
-        <Route path="/register" element={<Register />} />
+        <Route
+          path="/register"
+          element={
+            <ProtectedComponents loginOnly={false}>
+              <Register />
+            </ProtectedComponents>
+          }
+        />
         <Route
           path="/book/:id"
           element={

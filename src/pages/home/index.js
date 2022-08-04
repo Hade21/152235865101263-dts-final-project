@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { setBookList, setSearchResult } from "../../app/bookSlice/bookSlice";
 import { Footer, Header, ListBook, TopBar, Wishlist } from "../../components";
 import { api } from "../../config/api/api";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const wishlist = useSelector((state) => state.book.wishlist);
   const page = useSelector((state) => state.book.page);
   const category = useSelector((state) => state.book.category);
@@ -51,7 +53,13 @@ const Home = () => {
           setLoading(false);
         }
       } catch (error) {
-        alert("Error fetching data, Please refresh page!");
+        if (error?.message === "Network Error") {
+          alert("Koneksi terputus!");
+        } else if (error?.message === "timeout of 5000ms exceeded") {
+          navigate("/");
+        } else if (error.response?.status === 401) {
+          navigate("/login");
+        }
       }
     }
 
