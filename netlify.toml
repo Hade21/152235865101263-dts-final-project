@@ -1,4 +1,11 @@
 [[redirects]]
-from = "/*"
+from = "/"
 to = "/"
-status = 404
+
+[[redirects]]
+from = "/login"
+to = "/login"
+
+[[redirects]]
+from = "/register"
+to = "/register"
