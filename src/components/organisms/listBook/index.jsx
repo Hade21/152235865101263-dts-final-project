@@ -40,7 +40,7 @@ const ListBook = ({ data, loading }) => {
   );
 
   const content = (
-    <div className="list-wrapper h-full snap-y grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-4 overflow-auto">
+    <div className="list-wrapper h-full snap-y snap-mandatory grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-4 overflow-auto">
       {data?.length > 0 ? (
         data.map((item, i) => {
           return (
